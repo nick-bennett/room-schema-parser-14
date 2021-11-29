@@ -17,8 +17,8 @@ public class Parser {
         .excludeFieldsWithoutExposeAnnotation()
         .create();
     try (Reader reader = new InputStreamReader(System.in)) {
-      StreamableDdl ddl = gson.fromJson(reader, Schema.class);
-      ddl
+      gson
+          .fromJson(reader, Schema.class)
           .streamDdl()
           .map(Parser::terminate)
           .forEach(System.out::print);
