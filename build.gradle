@@ -1,0 +1,44 @@
+plugins {
+    id 'application'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    implementation 'com.google.code.gson:gson:2.8.9'
+
+    def junitVersion = '5.8.1'
+    testImplementation "org.junit.jupiter:junit-jupiter:$junitVersion"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+
+}
+
+test {
+    useJUnitPlatform()
+}
+
+ext {
+    javaMainClass = 'edu.cnm.deepdive.Parser'
+}
+
+application {
+    mainModule = group
+    mainClass = javaMainClass
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': javaMainClass
+        )
+    }
+}
